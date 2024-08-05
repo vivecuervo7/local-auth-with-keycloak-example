@@ -8,8 +8,6 @@ services:
     environment:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
-      - KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/data/certificates/cert.pem
-      - KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/data/certificates/key.pem
     volumes:
       - keycloak_data:/opt/keycloak/data
       - ./keycloak-import:/opt/keycloak/data/import
@@ -18,5 +16,7 @@ services:
     command:
       - "start-dev"
       - "--import-realm"
+      - "--https-certificate-file=/opt/keycloak/data/certificates/cert.pem"
+      - "--https-certificate-key-file=/opt/keycloak/data/certificates/key.pem"
 volumes:
   keycloak_data:
