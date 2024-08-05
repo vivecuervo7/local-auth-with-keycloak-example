@@ -1,0 +1,5 @@
+services:
+  keycloak:
+    command: "export --dir /opt/keycloak/data/export/ --realm local-dev --users realm_file"
+    volumes:
+      - ./keycloak-export:/opt/keycloak/data/export

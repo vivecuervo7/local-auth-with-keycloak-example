@@ -1,0 +1,22 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak:25.0.2
+    container_name: keycloak
+    ports:
+      - 8080:8080
+      - 8443:8443
+    environment:
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+      - KC_HTTPS_CERTIFICATE_FILE=/opt/keycloak/data/certificates/cert.pem
+      - KC_HTTPS_CERTIFICATE_KEY_FILE=/opt/keycloak/data/certificates/key.pem
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+      - ./keycloak-import:/opt/keycloak/data/import
+      - ./certificates:/opt/keycloak/data/certificates
+    restart: always
+    command:
+      - "start-dev"
+      - "--import-realm"
+volumes:
+  keycloak_data:
